@@ -9,6 +9,9 @@ import re
 app = Flask(__name__)
 userlist = []
 
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
 @app.route('/')
 def hello():
     return "Hello World!"
@@ -28,8 +31,7 @@ def select():
     print(json.dumps(data))
     channel = data.get('channel_id')
     print(channel)
-    # channel = 'CLTN9FWJK'
-    token = 'xoxp-401097423840-401121670704-719274018822-79240cb58c50405036901b9de95006ac'
+    token = config.get('token')
     url = 'https://slack.com/api/channels.info'
     params = {
         'channel': channel,
